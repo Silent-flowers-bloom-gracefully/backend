@@ -4,6 +4,8 @@ import com.lylist.silentflowers.domain.global.StatusException
 import com.lylist.silentflowers.infra.exchange.ProblemResponse
 import com.lylist.silentflowers.infra.exchange.ResponseWriter
 import jakarta.servlet.http.HttpServletResponse
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Component
 class ExceptionResolver(
     private val responseWriter: ResponseWriter
 ) {
+
+    private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
     fun resolveException(response: HttpServletResponse, e: Exception) {
         when (e) {
@@ -35,5 +39,7 @@ class ExceptionResolver(
                 )
             }
         }
+
+        log.info("[status {${response.status}] Exception resolved: ${e.javaClass.name} - ${e.message}")
     }
 }

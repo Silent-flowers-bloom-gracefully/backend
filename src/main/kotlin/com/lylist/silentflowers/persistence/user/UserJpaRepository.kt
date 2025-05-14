@@ -1,11 +1,10 @@
 package com.lylist.silentflowers.persistence.user
 
-import org.springframework.data.repository.Repository
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
 
-@org.springframework.stereotype.Repository
-interface UserJpaRepository : Repository<UserJpaEntity, Long?> {
-
-    fun save(userJpaEntity: UserJpaEntity): UserJpaEntity
+@Repository
+interface UserJpaRepository : JpaRepository<UserJpaEntity, Long?> {
 
     fun findByUsername(username: String): UserJpaEntity?
 }

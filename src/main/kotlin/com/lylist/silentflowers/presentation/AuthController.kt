@@ -7,10 +7,8 @@ import com.lylist.silentflowers.presentation.user.dto.SignupWebRequest
 import jakarta.servlet.http.HttpServletResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpHeaders
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/auth")
 @RestController
@@ -19,6 +17,7 @@ class AuthController(
     private val loginUseCase: LoginUseCase
 ) {
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/signup")
     fun signup(
         @Valid
@@ -28,6 +27,7 @@ class AuthController(
         signupUseCase(req)
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/login")
     fun login(
         @Valid

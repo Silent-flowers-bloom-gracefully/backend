@@ -7,7 +7,10 @@ import com.lylist.silentflowers.domain.user.port.out.CreateAuthenticationPort
 import com.lylist.silentflowers.domain.user.port.out.query.FindUserByUsernameQuery
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Isolation
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional(isolation = Isolation.REPEATABLE_READ)
 @Service
 class LoginService(
     private val findUserByUsernameQuery: FindUserByUsernameQuery,

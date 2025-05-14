@@ -9,8 +9,8 @@ class BucketJpaEntity(
     id: Long? = null,
     user: UserJpaEntity,
     content: String,
-    isSucceed: Boolean,
-    categories: String
+    isSucceed: Boolean = false,
+    categories: Set<String> = emptySet()
 ) {
 
     @Id
@@ -32,6 +32,6 @@ class BucketJpaEntity(
         protected set
 
     @Column(name = "categories", columnDefinition = "VARCHAR(100)", nullable = false, updatable = false, length = 100)
-    var categories: String = categories
+    var categories: String = categories.joinToString(",")
         protected set
 }
