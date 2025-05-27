@@ -34,4 +34,8 @@ class BucketJpaEntity(
     @Column(name = "categories", columnDefinition = "VARCHAR(100)", nullable = false, updatable = false, length = 100)
     var categories: String = categories.joinToString(",")
         protected set
+
+    @OneToMany(mappedBy = "bucket", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    var todoList: MutableList<TodoJpaEntity> = mutableListOf()
+        protected set
 }

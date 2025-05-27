@@ -13,7 +13,14 @@ data class BucketListResponse(
                         id = it.id,
                         content = it.content,
                         categories = it.categories,
-                        isSucceed = it.isSucceed
+                        isSucceed = it.isSucceed,
+                        todo = it.todoList.map { todo ->
+                            TodoResponse(
+                                todoId = todo.id,
+                                content = todo.content,
+                                isSucceed = todo.isSucceed
+                            )
+                        }
                     )
                 }
             )

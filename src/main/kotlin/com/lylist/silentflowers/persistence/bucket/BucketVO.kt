@@ -2,6 +2,7 @@ package com.lylist.silentflowers.persistence.bucket
 
 import com.lylist.silentflowers.domain.bucket.vo.Bucket
 import com.lylist.silentflowers.domain.bucket.vo.BucketList
+import com.lylist.silentflowers.domain.bucket.vo.Todo
 import com.lylist.silentflowers.persistence.user.UserVO
 
 class BucketVO(
@@ -21,6 +22,11 @@ class BucketVO(
     override val isSucceed: Boolean
         get() = entity.isSucceed
 
+    override val todoList: List<Todo>
+        get() = getEntity().todoList.map {
+            TodoVO(it, this)
+        }
+
     fun getEntity(): BucketJpaEntity = entity
 
     override fun equals(other: Any?): Boolean =
@@ -37,6 +43,12 @@ class BucketVO(
                 false
             }
         }
+
+    override fun hashCode(): Int {
+        var result = entity.hashCode()
+        result = 31 * result + user.hashCode()
+        return result
+    }
 }
 
 data class BucketListVO(
