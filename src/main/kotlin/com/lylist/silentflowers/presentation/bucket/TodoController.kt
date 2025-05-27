@@ -2,6 +2,7 @@ package com.lylist.silentflowers.presentation.bucket
 
 import com.lylist.silentflowers.domain.bucket.port.`in`.CreateTodoUseCase
 import com.lylist.silentflowers.domain.bucket.port.`in`.DeleteTodoUseCase
+import com.lylist.silentflowers.domain.bucket.port.`in`.SuccessTodoUseCase
 import com.lylist.silentflowers.presentation.bucket.dto.CreateTodoWebRequest
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Positive
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class TodoController(
     private val createTodoUseCase: CreateTodoUseCase,
-    private val deleteTodoUseCase: DeleteTodoUseCase
+    private val deleteTodoUseCase: DeleteTodoUseCase,
+    private val successTodoUseCase: SuccessTodoUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,5 +40,16 @@ class TodoController(
         id: Long
     ) {
         deleteTodoUseCase(id)
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/{id}/success")
+    fun successTodo(
+        @Valid
+        @Positive
+        @PathVariable
+        id: Long
+    ) {
+        successTodoUseCase(id)
     }
 }
