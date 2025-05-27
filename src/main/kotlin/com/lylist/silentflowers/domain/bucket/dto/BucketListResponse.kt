@@ -3,12 +3,12 @@ package com.lylist.silentflowers.domain.bucket.dto
 import com.lylist.silentflowers.domain.bucket.vo.BucketList
 
 data class BucketListResponse(
-    val bucketList: List<BucketResponse>,
+    val contents: List<BucketResponse>,
 ) {
     companion object {
         fun of(bucketList: BucketList): BucketListResponse {
             return BucketListResponse(
-                bucketList = bucketList().map {
+                contents = bucketList().map {
                     BucketResponse(
                         id = it.id,
                         content = it.content,
