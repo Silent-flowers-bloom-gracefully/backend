@@ -14,7 +14,15 @@ class SecurityConfig(
     @Bean
     fun filterChainConfig(http: HttpSecurity): SecurityFilterChain = http
         .csrf { it.disable() }
-        .cors { it.disable() }
+        .cors { it.configurationSource {
+            org.springframework.web.cors.CorsConfiguration().apply {
+                allowedOrigins = listOf("*")
+                allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                allowedHeaders = listOf("*")
+                allowCredentials = true
+            }
+        }
+        }
         .formLogin { it.disable() }
         .logout { it.disable() }
         .sessionManagement { it.disable() }
