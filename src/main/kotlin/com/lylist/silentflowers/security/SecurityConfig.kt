@@ -16,10 +16,9 @@ class SecurityConfig(
         .csrf { it.disable() }
         .cors { it.configurationSource {
             org.springframework.web.cors.CorsConfiguration().apply {
-                allowedOrigins = listOf("*")
+                allowedOrigins = listOf("*",)
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 allowedHeaders = listOf("*")
-                allowCredentials = true
             }
         }
         }
