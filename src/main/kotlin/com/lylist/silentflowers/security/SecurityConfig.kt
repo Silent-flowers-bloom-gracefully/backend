@@ -18,7 +18,7 @@ class SecurityConfig(
             org.springframework.web.cors.CorsConfiguration().apply {
                 allowedOrigins = listOf("*",)
                 allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                allowedHeaders = listOf("*")
+                allowedHeaders = listOf("Contet-Type", "Authorization", "Cache-Control", "X-Requested-With", "Accept", "Origin", "User-Agent")
             }
         }
         }
